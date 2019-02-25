@@ -4,7 +4,23 @@ const routes = [
     path: '/',
     component: () => import('layouts/MyLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Boards.vue') },
+      {
+        name: 'boards',
+        path: '',
+        component: () => import('pages/Boards.vue'),
+      },
+      {
+        name: 'board',
+        path: '/board',
+        component: () => import('pages/Board.vue'),
+        props: route => ({ board: route.query.b }),
+      },
+      {
+        name: 'thread',
+        path: '/thread',
+        component: () => import('pages/Thread.vue'),
+        props: route => ({ board: route.query.b, threadNumber: route.query.t.toString() }),
+      },
     ],
   },
 ];
